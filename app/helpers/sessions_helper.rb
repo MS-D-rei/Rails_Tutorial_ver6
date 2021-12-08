@@ -4,7 +4,7 @@ module SessionsHelper
   end
 
   def remember(user)
-    user.remember
+    user.remember # get remember_token and remember_digest
     cookies.signed[:user_id] = { value: user.id, expires: 20.years.from_now.utc }
     cookies.signed[:remember_token] = { value: user.remember_token, expires: 20.years.from_now.utc }
   end
@@ -16,7 +16,7 @@ module SessionsHelper
       user = User.find_by(id: user_id)
       if user&.authenticated?(cookies[:remember_token])
         log_in user
-        @current_user = userreme
+        @current_user = user
       end
     end
   end

@@ -55,11 +55,19 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     # check the page shows logout and profile
     assert_select 'a[href=?]', logout_path
     assert_select 'a[href=?]', user_path(@user)
+    # delete logout_path and check redirected destination is root_path
     delete logout_path
     assert_redirected_to root_path
+    # simulate when a user tap logout in the 2nd window
+    delete logout_path
+    # move to redirected destination
     follow_redirect!
     assert_select 'a[href=?]', login_path
     assert_select 'a[href=?]', logout_path, count: 0
     assert_select 'a[href=?]', user_path(@user), count: 0
+  end
+
+  test 'authenticated? should return false for a user with nil digest' do
+    assert_not @user.authenticated?('')
   end
 end
