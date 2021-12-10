@@ -6,7 +6,7 @@ module SessionsHelper
   def remember(user)
     user.remember # get remember_token and remember_digest
     cookies.signed[:user_id] = { value: user.id, expires: 20.years.from_now.utc }
-    cookies.signed[:remember_token] = { value: user.remember_token, expires: 20.years.from_now.utc }
+    cookies[:remember_token] = { value: user.remember_token, expires: 20.years.from_now.utc }
   end
 
   def current_user
