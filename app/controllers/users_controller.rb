@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: %i[edit update]
+  before_action :logged_in_user, only: %i[index edit update]
   before_action :correct_user, only: %i[edit update]
+
+  def index
+    @users = User.all
+  end
 
   def show
     # :id will be a string type but 'find' method automatically convert it to int type.
