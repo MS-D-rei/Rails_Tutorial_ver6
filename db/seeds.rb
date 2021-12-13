@@ -5,3 +5,27 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+# main sample user 1
+# create returns false if user is invalid.
+# create! returns raise exception if user is invalid
+# this makes easier to find error and debug
+User.create!(
+  name: 'Example User',
+  email: 'example@railstutorial.org',
+  password: 'foobar',
+  password_confirmation: 'foobar'
+)
+
+# addtional users
+99.times do |n|
+  name = Faker::Name.name
+  email = "example-#{n+1}@railstutorial.org"
+  password = 'password'
+  User.create!(
+    name: name,
+    email: email,
+    password: password,
+    password_confirmation: password
+  )
+end
