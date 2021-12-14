@@ -68,7 +68,7 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   host = 'secret-fjord-08374.herokuapp.com'
   config.action_mailer.default_url_options = { host: host }
-  ActionMailer::Base.smtp_setting = {
+  ActionMailer::Base.smtp_settings = {
     :post => ENV['MAILGUN_SMTP_PORT'],
     :address => ENV['MAILGUN_SMTP_SERVER'],
     :user_name => ENV['MAILGUN_SMTP_LOGIN'],
