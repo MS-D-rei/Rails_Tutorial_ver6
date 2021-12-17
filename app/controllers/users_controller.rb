@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   def show
     # :id will be a string type but 'find' method automatically convert it to int type.
     @user = User.find(params[:id])
+    @microposts = @user.microposts.paginate(page: params[:page])
     redirect_to root_url and return unless @user.activated?
   end
 
